@@ -4,6 +4,7 @@ const logger = require("./src/services/logger");
 const helmet = require('helmet');
 const compression = require('compression');
 const config = require("./src/config/config");
+const database = require("./src/database/database");
 
 // Settings
 app.set('port', config.port);
@@ -20,8 +21,9 @@ app.use('/api/v1', require("./src/routes/authRoute"));
 // HEALTH CHECK
 app.use('/health', (req, res) => res.status(200).send("I'm alive"));
 
-app.listen(app.get('port'), () => logger.info(`Server running on port ${app.get('port')}`));
-
+database.connect().then(() => {
+    app.listen(app.get('port'), () => logger.info(`Server running on port ${app.get('port')}`));
+})
 
 
 
