@@ -16,6 +16,4 @@ UserSchema.plugin(mongoosePaginate);
 
 const userModel = mongoose.model('User', UserSchema);
 
-userModel.paginate().then({});
-
 module.exports = userModel;

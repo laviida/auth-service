@@ -6,7 +6,7 @@ exports.createUser = async (name, surname, email, password) => {
     return user;
 }
 
-exports.getByEmail = async (email) => await User.findOne({ email }, { name: 1, _id: 1, password: 1 });
+exports.getByEmail = async (email) => await User.findOne({ email });
 
 
 

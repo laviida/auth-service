@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const config = require("./src/config/config");
 const database = require("./src/database/database");
+const cors = require('cors');
 
 // Settings
 app.set('port', config.port);
@@ -14,9 +15,10 @@ app.use(express.json({ limit: config.request_limit }));
 app.use(express.urlencoded({ limit: config.request_limit, extended: true }));
 app.use(helmet());
 app.use(compression());
+app.use(cors());
 
 // Routes
-app.use('/api/v1', require("./src/routes/authRoute"));
+app.use('/api/v1/auth', require("./src/routes/authRoute"));
 
 // HEALTH CHECK
 app.use('/health', (req, res) => res.status(200).send("I'm alive"));
